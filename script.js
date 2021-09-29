@@ -1,14 +1,14 @@
-var swidth
+var swidth, 
 
-swidth = 800;
+swidth = 1000;
 
-class Woodrec{
-  constructor(x, y, w, h, vx, vy, c){
+class GlassRec{
+  constructor(x, y, w, h, c, vx, vy){
     this.x = x;
     this.y = y;
     this.h = h;
     this.w = w;
-    this.c = c;
+    this.clor = c;
     this.vx = vx;
     this.vy = vy;
     
@@ -20,12 +20,56 @@ class Woodrec{
 
 }
 
-var rec1, rec2, rec3, rec4
+class GlassEllip{
+  constructor(x, y, w, h, c, vx, vy){
+    this.x = x;
+    this.y = y;
+    this.h = h;
+    this.w = w;
+    this.clor = c;
+    this.vx = vx;
+    this.vy = vy;
+    
+  }
+
+  draw(){
+    ellipse(this.x, this.y,this.w, this.h, this.c, this.vx, this.vy);
+  }
+
+}
+
+class Woodrec{
+  constructor(x, y, w, h, c, vx, vy){
+    this.x = x;
+    this.y = y;
+    this.h = h;
+    this.w = w;
+    this.clor = c;
+    this.vx = vx;
+    this.vy = vy;
+    
+  }
+
+  draw(){
+    rect(this.x, this.y,this.w, this.h, this.c, this.vx, this.vy);
+  }
+
+}
+
+var rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, ellip1, glassrec1, glassrec2
 
 function setup() {
 	createCanvas(swidth, 400);
-  rec1 = new Woodrec(500, 335, 210, 15, );
- 
+  rec1 = new Woodrec(700, 335, 210, 15, "brown");
+  rec2 = new Woodrec(720, 250, 10, 85);
+  rec3 = new Woodrec(800, 250, 10, 85);
+  rec4 = new Woodrec(880, 250, 10, 85);
+  rec5 = new Woodrec(720, 240, 85, 10);
+  rec6 = new Woodrec(805, 240, 85, 10);
+  rec7 = new Woodrec(730, 150, 150, 10);
+  ellip1 = new GlassEllip(755, 130, 40, 40);
+  glassrec1 = new GlassRec(750, 160, 10, 80);
+  glassrec2 = new GlassRec(850, 160, 10, 80);
 }
 
 function draw(){
@@ -34,21 +78,23 @@ function draw(){
   
   rect(0,350,swidth,50);
   
+  fill("#a56f36")
+
   rec1.draw();
-  rect(520, 250, 10, 85);
-  rect(600, 250, 10, 85);
-  rect(680, 250, 10, 85);
-  rect(520, 240, 85, 10);
-  rect(605, 240, 85, 10);
-  rect(530, 150, 150, 10);
-  rect(100,265, 15, 85);
-  ellipse(555, 130, 40, 40);
+  rec2.draw();
+  rec3.draw();
+  rec4.draw();
+  rec5.draw();
+  rec6.draw();
+  rec7.draw();
+  rect(250,265, 15, 85);
+  
 
 
   fill("#ccfffe");
-  rect(550, 160, 10, 80);
-  rect(650, 160, 10, 80);
-  ellipse(555, 130, 40, 40);
+  glassrec1.draw();
+  glassrec2.draw();
+  ellip1.draw();
 
 }
 
