@@ -3,6 +3,22 @@ var swidth,
 swidth = 1000;
 
 //Classes//
+
+class RedBird{
+  constructor(x, y, w, h, c, vx, vy){
+    this.x = x;
+    this.y = y;
+    this.h = h;
+    this.w = w;
+    this.clor = c;
+    this.vx = vx;
+    this.vy = vy;
+  }
+  draw(){
+    ellipse(this.x, this.y,this.w, this.h, this.c, this.vx, this.vy);
+  }
+}
+
 class GlassRec{
   constructor(x, y, w, h, c, vx, vy){
     this.x = x;
@@ -57,7 +73,9 @@ class Woodrec{
 
 }
 
-var rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, ellip1, glassrec1, glassrec2
+var rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, ellip1, glassrec1, glassrec2, redb
+
+var rects = [];
 
 function setup() {
 	createCanvas(swidth, 400);
@@ -68,30 +86,44 @@ function setup() {
   rec5 = new Woodrec(720, 240, 85, 10);
   rec6 = new Woodrec(805, 240, 85, 10);
   rec7 = new Woodrec(730, 150, 150, 10);
+
+  rects.push(rec1);
+  rects.push(rec2);
+  rects.push(rec3);
+  rects.push(rec4);
+  rects.push(rec5);
+  rects.push(rec6);
+  rects.push(rec7);
+
   ellip1 = new GlassEllip(755, 130, 40, 40);
   glassrec1 = new GlassRec(750, 160, 10, 80);
   glassrec2 = new GlassRec(850, 160, 10, 80);
+  redb = new RedBird(200, 265, 40, 40);
 }
+
+var lineY = 0;
 
 function draw(){
   background("cyan");
   fill("#298f12");
   
   rect(0,350,swidth,50);
+
+  line(10,350, width, lineY);
+  //lineY++;
+  // keyUp => lineY --;
+  // keyDown => lineY ++;
+
   
   //Wooden Recs//
   fill("#a56f36")
-  rec1.draw();
-  rec2.draw();
-  rec3.draw();
-  rec4.draw();
-  rec5.draw();
-  rec6.draw();
-  rec7.draw();
+  rects.forEach(r=>r.draw());
 
   //Slingshot//
   rect(250,265, 15, 85);
   
+  //Birds//
+  redb.draw();
 
   //Glass Ellipse and Rectangles//
   fill("#ccfffe");
