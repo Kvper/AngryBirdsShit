@@ -2,6 +2,7 @@ var swidth,
 
 swidth = 1000;
 
+//Classes//
 class GlassRec{
   constructor(x, y, w, h, c, vx, vy){
     this.x = x;
@@ -78,8 +79,8 @@ function draw(){
   
   rect(0,350,swidth,50);
   
+  //Wooden Recs//
   fill("#a56f36")
-
   rec1.draw();
   rec2.draw();
   rec3.draw();
@@ -87,10 +88,12 @@ function draw(){
   rec5.draw();
   rec6.draw();
   rec7.draw();
+
+  //Slingshot//
   rect(250,265, 15, 85);
   
 
-
+  //Glass Ellipse and Rectangles//
   fill("#ccfffe");
   glassrec1.draw();
   glassrec2.draw();
