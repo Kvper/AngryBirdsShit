@@ -1,22 +1,27 @@
-var swidth, 
+var swidth, vx
 
 swidth = 1000;
+vx = 0;
 
 //Classes//
 
 class RedBird{
-  constructor(x, y, w, h, c, vx, vy){
+  constructor(x, y, w, h, vx, vy){
     this.x = x;
     this.y = y;
     this.h = h;
     this.w = w;
-    this.clor = c;
+    this.clor = "red";
     this.vx = vx;
     this.vy = vy;
   }
   draw(){
-    ellipse(this.x, this.y,this.w, this.h, this.c, this.vx, this.vy);
+
+    ellipse(this.x, this.y,this.w, this.h);
+    this.x += this.vx;
+    this.y += this.vy;
   }
+
 }
 
 class GlassRec{
@@ -77,6 +82,8 @@ var rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, ellip1, glassrec1, glassrec2
 
 var rects = [];
 
+let bg;
+
 function setup() {
 	createCanvas(swidth, 400);
   rec1 = new Woodrec(700, 335, 210, 15, "brown");
@@ -94,14 +101,16 @@ function setup() {
   rects.push(rec5);
   rects.push(rec6);
   rects.push(rec7);
-
+  
+  
   ellip1 = new GlassEllip(755, 130, 40, 40);
   glassrec1 = new GlassRec(750, 160, 10, 80);
   glassrec2 = new GlassRec(850, 160, 10, 80);
-  redb = new RedBird(200, 265, 40, 40);
+  redb = new RedBird(235, 295, 25, 25, 0, 0);
 }
 
 var lineY = 0;
+
 
 function draw(){
   background("cyan");
@@ -109,7 +118,8 @@ function draw(){
   
   rect(0,350,swidth,50);
 
-  line(10,350, width, lineY);
+  line(235, 295, mouseX, mouseY);
+
   //lineY++;
   // keyUp => lineY --;
   // keyDown => lineY ++;
@@ -120,8 +130,12 @@ function draw(){
   rects.forEach(r=>r.draw());
 
   //Slingshot//
-  rect(250,265, 15, 85);
+  rect(250, 285, 15, 65);
   
+  
+
+
+  fill("#f41e1e")
   //Birds//
   redb.draw();
 
@@ -132,4 +146,14 @@ function draw(){
   ellip1.draw();
 
 }
+
+function mouseClicked() {
+  redb.vx = 3;
+  let xdist = mouseX - redb.x;
+  let ydist = redb.y - mouseY;
+
+  let speed = xdist / redb.vx;
+  redb.vy = (ydist / speed) *-1;
+}
+
 
