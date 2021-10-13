@@ -63,16 +63,18 @@ class Block {
 
   checkCollision(){
     if(redb.x + redb.w > this.x){
-      // todo: niet rood maken maar blokje verwijderen? ofzo..
-      redb.x = 1000;
-      this.x = 1000;
-      //redb.vx = redb.vx * -1
-      //redb.vy = redb.vy * -1
-    }
-    else{
-      redb.x = redb.x;
-    }
 
+      if(redb.y > this.y){
+
+        var idx = rects.indexOf(this);
+        rects.splice(idx,1);
+
+        //this.x = 1000;
+        redb = new RedBird(235, 295, 25, 25, 0, 0);
+        // redb.vx = redb.vx * -1
+        // redb.vy = redb.vy * -1
+      }     
+    }
   }
 }
 
