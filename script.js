@@ -1,4 +1,4 @@
-var swidth, vx
+var swidth, mode, vx
 
 swidth = 1000;
 vx = 0;
@@ -16,7 +16,7 @@ class RedBird {
     this.r = r
   }
 
-  draw(){
+  draw() {
 
     rect(this.x, this.y, this.w, this.h);
     this.x += this.vx;
@@ -36,7 +36,7 @@ class GlassEllip {
 
   }
 
-  draw(){
+  draw() {
     ellipse(this.x, this.y, this.w, this.h, this.c, this.vx, this.vy);
   }
 }
@@ -56,20 +56,23 @@ class Block {
 
   }
 
-  draw(){
+  draw() {
     fill(this.clor);
     rect(this.x, this.y, this.w, this.h, this.c);
   }
 
   checkCollision(){
-    if(redb.x + redb.w > this.x ){
+    if(redb.x + redb.w > this.x){
       // todo: niet rood maken maar blokje verwijderen? ofzo..
+      redb.x = 1000;
       this.x = 1000;
-      
+      //redb.vx = redb.vx * -1
+      //redb.vy = redb.vy * -1
     }
     else{
-      this.x = this.x;
+      redb.x = redb.x;
     }
+
   }
 }
 
@@ -80,8 +83,10 @@ var rects = [];
 let bg;
 
 function setup() {
-  createCanvas(swidth, 400);e = 0;
-  recw = new Block(700, 335, 210, 15);
+  createCanvas(swidth, 400);
+  mode = 0;
+  textSize(21);
+  rec1 = new Block(700, 335, 210, 15);
   rec2 = new Block(720, 250, 10, 85);
   rec3 = new Block(800, 250, 10, 85);
   rec4 = new Block(880, 250, 10, 85);
@@ -104,17 +109,33 @@ function setup() {
   rects.push(glassrec2);
 
 
-  ellip1 = new GlassEllip(755, 130, 40, 40);
+  ellip1 = new GlassEllip(755, 130, 40, 40, "lime");
 
   redb = new RedBird(235, 295, 25, 25, 0, 0);
 }
 
 var lineY = 0;
 
+function mouseClicked() {
+  if (mode == 1){
+  redb.vx = 3;
+  let xdist = mouseX - redb.x;
+  let ydist = redb.y - mouseY;
+  let speed = xdist / redb.vx;
+  redb.vy = (ydist / speed) * -1;
+  }
+}
 
 function draw() {
-  clear();
-  fill("#29=f12");
+
+  if (mode == 0){
+    background('white');
+    text('Angry birbs press enter',250,200);
+  }
+
+  if (mode == 1){
+background("cyan");
+  fill("#298f12");
 
   rect(0, 350, swidth, 50);
 
@@ -144,11 +165,12 @@ function draw() {
   ellip1.draw();
 }
 
-function mouseClicked() {
-  redb.vx = 3;
-  let xdist = mouseX - redb.x;
-  let ydist = redb.y - mouseY;
 
-  let speed = xdist / redb.vx;
-  redb.vy = (ydist / speed) * -1;
+
+  
+}
+function keyPressed(){
+ if (keyCode === ENTER){
+   mode = 1;
+ }
 }
