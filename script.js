@@ -16,7 +16,7 @@ class RedBird {
     this.r = r
   }
 
-  draw() {
+  draw(){
 
     rect(this.x, this.y, this.w, this.h);
     this.x += this.vx;
@@ -36,7 +36,7 @@ class GlassEllip {
 
   }
 
-  draw() {
+  draw(){
     ellipse(this.x, this.y, this.w, this.h, this.c, this.vx, this.vy);
   }
 }
@@ -56,21 +56,20 @@ class Block {
 
   }
 
-  draw() {
+  draw(){
     fill(this.clor);
     rect(this.x, this.y, this.w, this.h, this.c);
   }
 
   checkCollision(){
-    if(redb.x + redb.w > this.x){
+    if(redb.x + redb.w > this.x ){
       // todo: niet rood maken maar blokje verwijderen? ofzo..
-      redb.x = 1000;
+      this.x = 1000;
       
     }
     else{
-      redb.x = redb.x;
+      this.x = this.x;
     }
-
   }
 }
 
@@ -81,8 +80,8 @@ var rects = [];
 let bg;
 
 function setup() {
-  createCanvas(swidth, 400);
-  rec1 = new Block(700, 335, 210, 15);
+  createCanvas(swidth, 400);e = 0;
+  recw = new Block(700, 335, 210, 15);
   rec2 = new Block(720, 250, 10, 85);
   rec3 = new Block(800, 250, 10, 85);
   rec4 = new Block(880, 250, 10, 85);
@@ -114,8 +113,8 @@ var lineY = 0;
 
 
 function draw() {
-  background("cyan");
-  fill("#298f12");
+  clear();
+  fill("#29=f12");
 
   rect(0, 350, swidth, 50);
 
