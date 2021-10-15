@@ -5,15 +5,14 @@ vx = 0;
 
 //Classes//
 class RedBird {
-  constructor(x, y, w, h, vx, vy, r) {
+  constructor(x, y, w, h, vx, vy) {
     this.x = x;
     this.y = y;
     this.h = h;
     this.w = w;
-    this.clor = "red";
+    this.clor = "#979797";
     this.vx = vx;
     this.vy = vy;
-    this.r = r
   }
 
   draw() {
@@ -25,19 +24,16 @@ class RedBird {
 }
 
 class GlassEllip {
-  constructor(x, y, w, h, c, vx, vy) {
+  constructor(x, y, w, h) {
     this.x = x;
     this.y = y;
     this.h = h;
     this.w = w;
-    this.clor = c;
-    this.vx = vx;
-    this.vy = vy;
-
-  }
+    this.clor = "lime";
+}
 
   draw() {
-    ellipse(this.x, this.y, this.w, this.h, this.c, this.vx, this.vy);
+    ellipse(this.x, this.y, this.w, this.h);
   }
 }
 
@@ -69,10 +65,7 @@ class Block {
         var idx = rects.indexOf(this);
         rects.splice(idx,1);
 
-        //this.x = 1000;
         redb = new RedBird(235, 295, 25, 25, 0, 0);
-        // redb.vx = redb.vx * -1
-        // redb.vy = redb.vy * -1
       }     
     }
   }
@@ -83,6 +76,7 @@ var rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, ellip1, glassrec1, glassrec2
 var rects = [];
 
 let bg;
+let sound;
 
 function setup() {
   createCanvas(swidth, 400);
@@ -98,7 +92,8 @@ function setup() {
 
   glassrec1 = new Block(750, 160, 10, 80, "lightblue");
   glassrec2 = new Block(850, 160, 10, 80, "lightblue");
-
+  
+  
   rects.push(rec1);
   rects.push(rec2);
   rects.push(rec3);
@@ -111,9 +106,12 @@ function setup() {
   rects.push(glassrec2);
 
 
-  ellip1 = new GlassEllip(755, 130, 40, 40, "lime");
+  ellip1 = new GlassEllip(755, 130, 40, 40);
 
   redb = new RedBird(235, 295, 25, 25, 0, 0);
+
+  //bg and music//
+  bg = loadImage("Images/angrypig.jpg");
 }
 
 var lineY = 0;
@@ -129,10 +127,11 @@ function mouseClicked() {
 }
 
 function draw() {
+  clear();
 
   if (mode == 0){
-    background('white');
-    text('Angry birbs press enter',250,200);
+    background(bg);
+    text('Angry pigeons press enter',400,50);
   }
 
   if (mode == 1){
@@ -167,12 +166,16 @@ background("cyan");
   ellip1.draw();
 }
 
-
-
   
 }
 function keyPressed(){
  if (keyCode === ENTER){
    mode = 1;
- }
+    if(sound.isPlaying()){
+      sound.stop();
+    }
+    else{
+      sound.play();
+    }
+  }
 }
